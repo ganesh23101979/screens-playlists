@@ -1,4 +1,3 @@
-// server.js
 import express from "express";
 import dotenv from "dotenv";
 import helmet from "helmet";
@@ -12,6 +11,7 @@ import { errorHandler } from "./middleware/errorHandler.js";
 
 dotenv.config();
 const app = express();
+const PORT = process.env.PORT || 4000;
 
 connectDB();
 
@@ -28,11 +28,12 @@ app.use("/auth", authRoutes);
 app.use("/screens", screensRoutes);
 app.use("/playlists", playlistsRoutes);
 
-app.get("/", (req, res) => {
-  res.send("API Working 🚀");
-});
-
 app.use(errorHandler);
 
+app.get('/',(req,res)=> {
+  res.send("API Working")
+})
 
-export default app;
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
