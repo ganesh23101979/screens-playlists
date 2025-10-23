@@ -66,5 +66,5 @@ SEED_ADMIN_PASSWORD=Ganesh@123
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/screens-playlists-system.git
+git clone https://github.com/ganesh23101979/screens-playlists.git
 cd screens-playlists-system
