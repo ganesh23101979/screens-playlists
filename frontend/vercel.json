@@ -1,15 +1,13 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/src/app/page.js"
-    }
-  ]
-}
+    "rewrites": [
+      {
+        "source": "/api/(.*)",
+        "destination": "https://screens-playlists-backend.vercel.app"
+      },
+      {
+        "source": "/(.*)",
+        "destination": "/"
+      }
+    ]
+  }
+  
