@@ -30,6 +30,10 @@ app.use("/playlists", playlistsRoutes);
 
 app.use(errorHandler);
 
+app.get('/',(req,res)=> {
+  res.send("API Working")
+})
+
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
