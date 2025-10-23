@@ -1,13 +1,8 @@
-{
+  {
     "rewrites": [
-      {
-        "source": "/api/(.*)",
-        "destination": "https://screens-playlists-backend.vercel.app"
-      },
       {
         "source": "/(.*)",
         "destination": "/"
       }
     ]
   }
-  
