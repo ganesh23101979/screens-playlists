@@ -16,7 +16,13 @@ export async function getPlaylists(req, res, next) {
       .limit(l)
       .select("name itemUrls");
 
-    const mapped = items.map(it => ({ _id: it._id, name: it.name, itemCount: (it.itemUrls || []).length }));
+    // ✅ Include itemUrls here
+    const mapped = items.map(it => ({
+      _id: it._id,
+      name: it.name,
+      itemCount: (it.itemUrls || []).length,
+      itemUrls: it.itemUrls || []
+    }));
 
     const total = await Playlist.countDocuments(filter);
     res.json({ items: mapped, page: p, limit: l, total });
@@ -25,18 +31,27 @@ export async function getPlaylists(req, res, next) {
   }
 }
 
+
 export async function createPlaylist(req, res, next) {
   try {
     const { error, value } = playlistCreateSchema.validate(req.body);
     if (error) return res.status(400).json({ message: error.message });
 
+    // Create and save a new playlist
     const pl = new Playlist({
       name: value.name,
       itemUrls: value.itemUrls || []
     });
 
     await pl.save();
-    res.status(201).json({ _id: pl._id, name: pl.name, itemCount: pl.itemUrls.length });
+
+    // Respond with created playlist details
+    res.status(201).json({
+      _id: pl._id,
+      name: pl.name,
+      itemCount: pl.itemUrls.length,
+      itemUrls: pl.itemUrls
+    });
   } catch (err) {
     next(err);
   }
