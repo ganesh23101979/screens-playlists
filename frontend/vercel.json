@@ -3,6 +3,10 @@
     {
       "source": "/api/(.*)",
       "destination": "https://screens-playlists-backend.vercel.app/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
